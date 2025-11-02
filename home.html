@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Marina Engineering Limited - Leading Electrical & Environmental Solutions</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .service-card {
+            max-height: 280px;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        
+        .service-card.expanded {
+            max-height: 600px;
+        }
+        
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            flex-shrink: 0;
+        }
+        
+        @media (min-width: 768px) {
+            .carousel-slide {
+                min-width: 50%;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .carousel-slide {
+                min-width: 33.333%;
+            }
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .badge {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-md fixed w-full top-0 z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="bg-blue-900 text-white p-2 rounded-lg">
+                        <span class="material-icons text-3xl">bolt</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-blue-900">San Marina Engineering</h1>
+                        <p class="text-xs text-gray-600">Limited</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <ul class="hidden md:flex space-x-8 items-center">
+                    <li><a href="#home" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Home</a></li>
+                    <li><a href="#about" class="nav-link text-gray-700 hover:text-blue-600 font-medium">About</a></li>
+                    <li><a href="#services" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Services</a></li>
+                    <li><a href="#projects" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Projects</a></li>
+                    <li><a href="#contact" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Contact</a></li>
+                    <li>
+                        <a href="#contact" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium">
+                            Get a Quote
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700 focus:outline-none">
+                    <span class="material-icons text-3xl">menu</span>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="mobile-menu md:hidden">
+                <ul class="pt-4 pb-2 space-y-2">
+                    <li><a href="#home" class="block py-2 text-gray-700 hover:text-blue-600 font-medium">Home</a></li>
+                    <li><a href="#about" class="block py-2 text-gray-700 hover:text-blue-600 font-medium">About</a></li>
+                    <li><a href="#services" class="block py-2 text-gray-700 hover:text-blue-600 font-medium">Services</a></li>
+                    <li><a href="#projects" class="block py-2 text-gray-700 hover:text-blue-600 font-medium">Projects</a></li>
+                    <li><a href="#contact" class="block py-2 text-gray-700 hover:text-blue-600 font-medium">Contact</a></li>
+                    <li class="pt-2">
+                        <a href="#contact" class="block text-center bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium">
+                            Get a Quote
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section id="home" class="pt-20 min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="absolute inset-0 opacity-10" style="background-image: url('https://images.unsplash.com/photo-1581094271901-8022df4466f9?auto=format&fit=crop&w=2000'); background-size: cover; background-position: center;"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center text-white">
+                <div class="fade-in">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                        San Marina Engineering Limited
+                    </h1>
+                    <p class="text-2xl md:text-3xl mb-8 text-blue-100">
+                        Leading Electrical & Environmental Solutions Since 2014
+                    </p>
+                    
+                    <div class="flex flex-wrap justify-center gap-4 mb-12">
+                        <div class="badge px-6 py-3 rounded-full border border-white/30 flex items-center space-x-2">
+                            <span class="material-icons">verified</span>
+                            <span class="font-semibold">EPRA Class A1 Licensed</span>
+                        </div>
+                        <div class="badge px-6 py-3 rounded-full border border-white/30 flex items-center space-x-2">
+                            <span class="material-icons">verified</span>
+                            <span class="font-semibold">NCA 5 Certified</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="#services" class="bg-white text-blue-900 px-8 py-4 rounded-lg hover:bg-gray-100 transition font-semibold text-lg flex items-center space-x-2">
+                            <span>Our Services</span>
+                            <span class="material-icons">arrow_forward</span>
+                        </a>
+                        <a href="#contact" class="bg-green-500 text-white px-8 py-4 rounded-lg hover:bg-green-600 transition font-semibold text-lg flex items-center space-x-2">
+                            <span>Contact Us</span>
+                            <span class="material-icons">phone</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-white">
+                <span class="material-icons text-4xl">keyboard_arrow_down</span>
+            </a>
+        </div>
+    </section>
+    
+    <!-- About Us Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">About Us</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div class="slide-in-left">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-6">Excellence in Engineering Since 2014</h3>
+                    <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+                        San Marina Engineering Limited (SMEL) is a leading multidisciplinary engineering firm specializing in electrical engineering, renewable energy solutions, and environmental services. Since our establishment in 2014, we have built a reputation for delivering innovative, sustainable, and reliable solutions across Kenya.
+                    </p>
+                    <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+                        Our team of highly qualified engineers and technicians combines technical expertise with a commitment to quality and safety, ensuring every project meets the highest standards. We are proud holders of EPRA Class A1 License and NCA Category 5 certification, demonstrating our capability to handle diverse and complex engineering projects.
+                    </p>
+                    <a href="#contact" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold text-lg">
+                        <span>Learn more about our expertise</span>
+                        <span class="material-icons ml-2">arrow_forward</span>
+                    </a>
+                </div>
+                
+                <div class="slide-in-right">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800" alt="Engineering Team" class="rounded-2xl shadow-2xl" loading="lazy">
+                </div>
+            </div>
+            
+            <!-- Key Highlights -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="bg-gradient-to-br from-blue-600 to-blue-800 text-white p-8 rounded-2xl text-center card-hover fade-in">
+                    <span class="material-icons text-5xl mb-4">engineering</span>
+                    <h4 class="text-2xl font-bold mb-2">10+ Years</h4>
+                    <p class="text-blue-100">Industry Expertise</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-500 to-green-700 text-white p-8 rounded-2xl text-center card-hover fade-in">
+                    <span class="material-icons text-5xl mb-4">verified_user</span>
+                    <h4 class="text-2xl font-bold mb-2">Licensed</h4>
+                    <p class="text-green-100">EPRA A1 & NCA 5</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-600 to-purple-800 text-white p-8 rounded-2xl text-center card-hover fade-in">
+                    <span class="material-icons text-5xl mb-4">groups</span>
+                    <h4 class="text-2xl font-bold mb-2">Expert Team</h4>
+                    <p class="text-purple-100">Multidisciplinary Professionals</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-orange-500 to-orange-700 text-white p-8 rounded-2xl text-center card-hover fade-in">
+                    <span class="material-icons text-5xl mb-4">health_and_safety</span>
+                    <h4 class="text-2xl font-bold mb-2">Quality First</h4>
+                    <p class="text-orange-100">Safety & Compliance</p>
+                </div>
+            </div>
+            
+            <!-- Stats Counter -->
+            <div class="grid md:grid-cols-3 gap-8 bg-gradient-to-r from-blue-900 to-blue-700 rounded-2xl p-12 text-white">
+                <div class="text-center fade-in">
+                    <div class="text-5xl font-bold mb-2 counter" data-target="11">0</div>
+                    <p class="text-xl text-blue-200">Years in Business</p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="text-5xl font-bold mb-2 counter" data-target="150">0</div>
+                    <p class="text-xl text-blue-200">Projects Completed</p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="text-5xl font-bold mb-2 counter" data-target="98">0</div>
+                    <p class="text-xl text-blue-200">Happy Clients</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Services</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Comprehensive engineering solutions tailored to meet your needs
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover service-card fade-in" data-service="1">
+                    <div class="p-8">
+                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                            <span class="material-icons text-4xl text-blue-600">electrical_services</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Electrical Engineering & Contracting</h3>
+                        <p class="text-gray-600 mb-4">
+                            Complete electrical installation, maintenance, and repair services for residential, commercial, and industrial facilities.
+                        </p>
+                        <div class="service-details hidden">
+                            <ul class="space-y-2 text-gray-600 mb-4">
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Design and installation of electrical systems</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Power distribution and control systems</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Preventive maintenance programs</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Emergency repair services</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="text-blue-600 hover:text-blue-800 font-semibold flex items-center learn-more-btn">
+                            <span>Learn More</span>
+                            <span class="material-icons ml-2">expand_more</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Service Card 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover service-card fade-in" data-service="2">
+                    <div class="p-8">
+                        <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                            <span class="material-icons text-4xl text-green-600">solar_power</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Renewable Energy Solutions</h3>
+                        <p class="text-gray-600 mb-4">
+                            Sustainable solar power systems design, installation, and maintenance for homes and businesses.
+                        </p>
+                        <div class="service-details hidden">
+                            <ul class="space-y-2 text-gray-600 mb-4">
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Solar PV system design and installation</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Off-grid and on-grid solutions</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Solar water heating systems</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>System monitoring and optimization</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="text-blue-600 hover:text-blue-800 font-semibold flex items-center learn-more-btn">
+                            <span>Learn More</span>
+                            <span class="material-icons ml-2">expand_more</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Service Card 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover service-card fade-in" data-service="3">
+                    <div class="p-8">
+                        <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                            <span class="material-icons text-4xl text-purple-600">cable</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Light Current Systems</h3>
+                        <p class="text-gray-600 mb-4">
+                            Advanced security, communication, and automation systems for modern facilities.
+                        </p>
+                        <div class="service-details hidden">
+                            <ul class="space-y-2 text-gray-600 mb-4">
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>CCTV and surveillance systems</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Access control and biometric systems</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Fire alarm and detection systems</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Building automation systems</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="text-blue-600 hover:text-blue-800 font-semibold flex items-center learn-more-btn">
+                            <span>Learn More</span>
+                            <span class="material-icons ml-2">expand_more</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Service Card 4 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover service-card fade-in" data-service="4">
+                    <div class="p-8">
+                        <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                            <span class="material-icons text-4xl text-yellow-600">assessment</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Energy Audits</h3>
+                        <p class="text-gray-600 mb-4">
+                            Comprehensive energy efficiency assessments to reduce costs and environmental impact.
+                        </p>
+                        <div class="service-details hidden">
+                            <ul class="space-y-2 text-gray-600 mb-4">
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Energy consumption analysis</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Efficiency improvement recommendations</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Cost-benefit analysis</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Implementation support</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="text-blue-600 hover:text-blue-800 font-semibold flex items-center learn-more-btn">
+                            <span>Learn More</span>
+                            <span class="material-icons ml-2">expand_more</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Service Card 5 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover service-card fade-in" data-service="5">
+                    <div class="p-8">
+                        <div class="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                            <span class="material-icons text-4xl text-teal-600">eco</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Environmental Services</h3>
+                        <p class="text-gray-600 mb-4">
+                            Environmental impact assessments, audits, and sustainable solutions for responsible development.
+                        </p>
+                        <div class="service-details hidden">
+                            <ul class="space-y-2 text-gray-600 mb-4">
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Environmental impact assessments</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Environmental audits</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Waste management solutions</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Compliance consulting</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="text-blue-600 hover:text-blue-800 font-semibold flex items-center learn-more-btn">
+                            <span>Learn More</span>
+                            <span class="material-icons ml-2">expand_more</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Service Card 6 - Additional Services -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover service-card fade-in" data-service="6">
+                    <div class="p-8">
+                        <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                            <span class="material-icons text-4xl text-red-600">build</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Consulting & Design</h3>
+                        <p class="text-gray-600 mb-4">
+                            Expert consulting and design services for all your engineering and environmental needs.
+                        </p>
+                        <div class="service-details hidden">
+                            <ul class="space-y-2 text-gray-600 mb-4">
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Project feasibility studies</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Technical design and drawings</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Project management</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="material-icons text-green-500 mr-2">check_circle</span>
+                                    <span>Quality assurance and control</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="text-blue-600 hover:text-blue-800 font-semibold flex items-center learn-more-btn">
+                            <span>Learn More</span>
+                            <span class="material-icons ml-2">expand_more</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Projects</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Showcasing our commitment to excellence through completed projects
+                </p>
+            </div>
+            
+            <div class="carousel-container relative max-w-6xl mx-auto">
+                <div class="carousel-track" id="projectCarousel">
+                    <!-- Project 1 -->
+                    <div class="carousel-slide px-4">
+                        <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
+                            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800" alt="Zawadi Apartments" class="w-full h-64 object-cover" loading="lazy">
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Zawadi Apartments</h3>
+                                <p class="text-blue-600 font-semibold mb-4 flex items-center">
+                                    <span class="material-icons mr-2">location_on</span>
+                                    Kisumu, Kenya
+                                </p>
+                                <p class="text-gray-600 mb-4">
+                                    Complete electrical installations for a modern residential complex, including power distribution, lighting systems, and backup power solutions.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Electrical Installation</span>
+                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Residential</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="carousel-slide px-4">
+                        <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800" alt="Residential House" class="w-full h-64 object-cover" loading="lazy">
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Residential House Project</h3>
+                                <p class="text-blue-600 font-semibold mb-4 flex items-center">
+                                    <span class="material-icons mr-2">location_on</span>
+                                    Kisumu, Kenya
+                                </p>
+                                <p class="text-gray-600 mb-4">
+                                    Full electrical installation for a luxury residential home, featuring smart home integration, energy-efficient lighting, and modern safety systems.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Electrical</span>
+                                    <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Smart Home</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3 -->
+                    <div class="carousel-slide px-4">
+                        <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
+                            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=800" alt="Solar Project" class="w-full h-64 object-cover" loading="lazy">
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">33kW Solar Power System</h3>
+                                <p class="text-blue-600 font-semibold mb-4 flex items-center">
+                                    <span class="material-icons mr-2">location_on</span>
+                                    Homabay, Kenya
+                                </p>
+                                <p class="text-gray-600 mb-4">
+                                    Design and installation of a 33kW solar power system for Wefetern Fresh Industries, reducing energy costs and carbon footprint significantly.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Solar Energy</span>
+                                    <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">Industrial</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 4 -->
+                    <div class="carousel-slide px-4">
+                        <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
+                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800" alt="Commercial Building" class="w-full h-64 object-cover" loading="lazy">
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Commercial Complex</h3>
+                                <p class="text-blue-600 font-semibold mb-4 flex items-center">
+                                    <span class="material-icons mr-2">location_on</span>
+                                    Nairobi, Kenya
+                                </p>
+                                <p class="text-gray-600 mb-4">
+                                    Comprehensive electrical and light current systems for a multi-story commercial building, including CCTV, access control, and fire alarm systems.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Electrical</span>
+                                    <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Security Systems</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carousel Controls -->
+                <button id="prevBtn" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-3 hover:bg-gray-100 transition z-10">
+                    <span class="material-icons text-gray-700">chevron_left</span>
+                </button>
+                <button id="nextBtn" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-3 hover:bg-gray-100 transition z-10">
+                    <span class="material-icons text-gray-700">chevron_right</span>
+                </button>
+                
+                <!-- Carousel Dots -->
+                <div class="flex justify-center mt-8 space-x-2" id="carouselDots"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Choose Us Section -->
+    <section class="py-20 bg-gradient-to-br from-blue-900 to-blue-700 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Why Choose Us</h2>
+                <div class="w-24 h-1 bg-white mx-auto mb-6"></div>
+                <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+                    Partnering with us means choosing quality, reliability, and innovation
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 text-center card-hover fade-in">
+                    <div class="bg-white/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="material-icons text-5xl">workspace_premium</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Certified Excellence</h3>
+                    <p class="text-blue-100">
+                        EPRA Class A1 and NCA Category 5 certifications demonstrate our capability and commitment to industry standards.
+                    </p>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 text-center card-hover fade-in">
+                    <div class="bg-white/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="material-icons text-5xl">psychology</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Innovative Solutions</h3>
+                    <p class="text-blue-100">
+                        We leverage the latest technology and engineering practices to deliver cutting-edge solutions tailored to your needs.
+                    </p>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 text-center card-hover fade-in">
+                    <div class="bg-white/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="material-icons text-5xl">support_agent</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Dedicated Support</h3>
+                    <p class="text-blue-100">
+                        Our team provides ongoing support and maintenance to ensure your systems operate at peak performance.
+                    </p>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 text-center card-hover fade-in">
+                    <div class="bg-white/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="material-icons text-5xl">schedule</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Timely Delivery</h3>
+                    <p class="text-blue-100">
+                        We understand the importance of deadlines and consistently deliver projects on time and within budget.
+                    </p>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 text-center card-hover fade-in">
+                    <div class="bg-white/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="material-icons text-5xl">leaf</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Sustainability Focus</h3>
+                    <p class="text-blue-100">
+                        We prioritize environmentally responsible solutions that reduce carbon footprint and promote renewable energy.
+                    </p>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 text-center card-hover fade-in">
+                    <div class="bg-white/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="material-icons text-5xl">verified</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Quality Assurance</h3>
+                    <p class="text-blue-100">
+                        Rigorous quality control processes ensure every project meets the highest standards of safety and performance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Ready to start your project? Contact us today for a consultation
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- Contact Form -->
+                <div class="bg-white rounded-2xl shadow-xl p-8 slide-in-left">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
+                    <form id="contactForm" class="space-y-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Full Name *</label>
+                            <input type="text" id="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Email Address *</label>
+                            <input type="email" id="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Phone Number *</label>
+                            <input type="tel" id="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Service Interest *</label>
+                            <select id="service" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition">
+                                <option value="">Select a service</option>
+                                <option value="electrical">Electrical Engineering & Contracting</option>
+                                <option value="renewable">Renewable Energy Solutions</option>
+                                <option value="lightcurrent">Light Current Systems</option>
+                                <option value="audit">Energy Audits</option>
+                                <option value="environmental">Environmental Services</option>
+                                <option value="consulting">Consulting & Design</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Message *</label>
+                            <textarea id="message" required rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition resize-none"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition font-semibold text-lg flex items-center justify-center space-x-2">
+                            <span>Send Message</span>
+                            <span class="material-icons">send</span>
+                        </button>
+                        
+                        <div id="formMessage" class="hidden mt-4 p-4 rounded-lg"></div>
+                    </form>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="slide-in-right">
+                    <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-blue-100 p-3 rounded-lg">
+                                    <span class="material-icons text-blue-600">location_on</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Address</h4>
+                                    <p class="text-gray-600">P.O. Box 22494 – 00100<br>Nairobi, Kenya</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-green-100 p-3 rounded-lg">
+                                    <span class="material-icons text-green-600">phone</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Phone</h4>
+                                    <p class="text-gray-600">+254 711 411 822</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-purple-100 p-3 rounded-lg">
+                                    <span class="material-icons text-purple-600">email</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Email</h4>
+                                    <p class="text-gray-600">sanmarinaengineering@gmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-orange-100 p-3 rounded-lg">
+                                    <span class="material-icons text-orange-600">language</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Website</h4>
+                                    <p class="text-gray-600">www.smel.co.ke</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-semibold text-gray-900 mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition">
+                                    <span class="material-icons">facebook</span>
+                                </a>
+                                <a href="#" class="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition">
+                                    <span class="material-icons">tag</span>
+                                </a>
+                                <a href="#" class="bg-blue-700 text-white p-3 rounded-full hover:bg-blue-800 transition">
+                                    <span class="material-icons">business</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Map Placeholder -->
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                        <div class="h-64 bg-gradient-to-br from-blue-200 to-blue-400 flex items-center justify-center">
+                            <div class="text-center text-blue-900">
+                                <span class="material-icons text-6xl mb-2">map</span>
+                                <p class="font-semibold">Google Maps Location</p>
+                                <p class="text-sm">Nairobi, Kenya</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="bg-blue-600 text-white p-2 rounded-lg">
+                            <span class="material-icons text-2xl">bolt</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold">San Marina Engineering</h3>
+                            <p class="text-xs text-gray-400">Limited</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Leading the way in electrical engineering, renewable energy, and environmental solutions across Kenya.
+                    </p>
+                    <div class="flex space-x-2">
+                        <span class="bg-blue-600 px-3 py-1 rounded text-xs">EPRA A1</span>
+                        <span class="bg-green-600 px-3 py-1 rounded text-xs">NCA 5</span>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
+                        <li><a href="#projects" class="text-gray-400 hover:text-white transition">Projects</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Details -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Details</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start space-x-2">
+                            <span class="material-icons text-sm mt-1">location_on</span>
+                            <span>P.O. Box 22494 – 00100, Nairobi</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="material-icons text-sm mt-1">phone</span>
+                            <span>+254 711 411 822</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="material-icons text-sm mt-1">email</span>
+                            <span>sanmarinaengineering@gmail.com</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="material-icons text-sm mt-1">language</span>
+                            <span>www.smel.co.ke</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 San Marina Engineering Limited. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+        
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Stats Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        let counterAnimated = false;
+        
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !counterAnimated) {
+                    counterAnimated = true;
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        const duration = 2000;
+                        const increment = target / (duration / 16);
+                        let current = 0;
+                        
+                        const updateCounter = () => {
+                            current += increment;
+                            if (current < target) {
+                                counter.textContent = Math.floor(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.textContent = target;
+                            }
+                        };
+                        
+                        updateCounter();
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        counters.forEach(counter => counterObserver.observe(counter));
+        
+        // Service Card Expand/Collapse
+        document.querySelectorAll('.learn-more-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const card = this.closest('.service-card');
+                const details = card.querySelector('.service-details');
+                const icon = this.querySelector('.material-icons');
+                
+                card.classList.toggle('expanded');
+                details.classList.toggle('hidden');
+                
+                if (card.classList.contains('expanded')) {
+                    this.querySelector('span:first-child').textContent = 'Show Less';
+                    icon.textContent = 'expand_less';
+                } else {
+                    this.querySelector('span:first-child').textContent = 'Learn More';
+                    icon.textContent = 'expand_more';
+                }
+            });
+        });
+        
+        // Projects Carousel
+        const carousel = document.getElementById('projectCarousel');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dotsContainer = document.getElementById('carouselDots');
+        const slides = document.querySelectorAll('.carousel-slide');
+        
+        let currentIndex = 0;
+        let slidesToShow = 1;
+        
+        // Determine slides to show based on screen width
+        function updateSlidesToShow() {
+            if (window.innerWidth >= 1024) {
+                slidesToShow = 3;
+            } else if (window.innerWidth >= 768) {
+                slidesToShow = 2;
+            } else {
+                slidesToShow = 1;
+            }
+            updateCarousel();
+            createDots();
+        }
+        
+        // Create carousel dots
+        function createDots() {
+            dotsContainer.innerHTML = '';
+            const totalDots = Math.ceil(slides.length - slidesToShow + 1);
+            for (let i = 0; i < totalDots; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'w-3 h-3 rounded-full transition ' + (i === 0 ? 'bg-blue-600' : 'bg-gray-300');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+        }
+        
+        function updateCarousel() {
+            const slideWidth = 100 / slidesToShow;
+            carousel.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+            updateDots();
+        }
+        
+        function updateDots() {
+            const dots = dotsContainer.querySelectorAll('button');
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.className = 'w-3 h-3 rounded-full bg-blue-600 transition';
+                } else {
+                    dot.className = 'w-3 h-3 rounded-full bg-gray-300 transition';
+                }
+            });
+        }
+        
+        function goToSlide(index) {
+            const maxIndex = slides.length - slidesToShow;
+            currentIndex = Math.max(0, Math.min(index, maxIndex));
+            updateCarousel();
+        }
+        
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            const maxIndex = slides.length - slidesToShow;
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+        
+        // Auto-play carousel
+        let autoPlayInterval = setInterval(() => {
+            const maxIndex = slides.length - slidesToShow;
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateCarousel();
+        }, 5000);
+        
+        // Pause auto-play on hover
+        carousel.addEventListener('mouseenter', () => {
+            clearInterval(autoPlayInterval);
+        });
+        
+        carousel.addEventListener('mouseleave', () => {
+            autoPlayInterval = setInterval(() => {
+                const maxIndex = slides.length - slidesToShow;
+                if (currentIndex < maxIndex) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0;
+                }
+                updateCarousel();
+            }, 5000);
+        });
+        
+        // Initialize carousel
+        updateSlidesToShow();
+        window.addEventListener('resize', updateSlidesToShow);
+        
+        // Contact Form Validation and Submission
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value.trim();
+            
+            // Validation
+            if (!name || !email || !phone || !service || !message) {
+                showMessage('Please fill in all required fields.', 'error');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showMessage('Please enter a valid email address.', 'error');
+                return;
+            }
+            
+            // Phone validation (basic)
+            const phoneRegex = /^[\d\s\+\-\(\)]+$/;
+            if (!phoneRegex.test(phone)) {
+                showMessage('Please enter a valid phone number.', 'error');
+                return;
+            }
+            
+            // Success message
+            showMessage('Thank you for your message! We will get back to you within 24 hours.', 'success');
+            
+            // Reset form
+            contactForm.reset();
+            
+            // In a real implementation, you would send the data to a server here
+            console.log('Form submitted:', { name, email, phone, service, message });
+        });
+        
+        function showMessage(text, type) {
+            formMessage.textContent = text;
+            formMessage.className = 'mt-4 p-4 rounded-lg ' + (type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800');
+            formMessage.classList.remove('hidden');
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+            }, 5000);
+        }
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.offsetTop;
+                    const offsetPosition = elementPosition - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Header shadow on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+        
+        // Lazy loading images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                        }
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+        
+        // Add hover effect to cards
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Keyboard navigation for carousel
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevBtn.click();
+            } else if (e.key === 'ArrowRight') {
+                nextBtn.click();
+            }
+        });
+        
+        // Add active state to navigation links based on scroll position
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPosition = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('text-blue-600');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('text-blue-600');
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Prevent form submission with Enter key on select elements
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                }
+            });
+        });
+        
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+        
+        // Console message for developers
+        console.log('%cSan Marina Engineering Limited', 'color: #1e3a8a; font-size: 24px; font-weight: bold;');
+        console.log('%cWebsite developed with modern web technologies', 'color: #3b82f6; font-size: 14px;');
+        console.log('%cFor inquiries: sanmarinaengineering@gmail.com', 'color: #10b981; font-size: 12px;');
+    </script>
+</body>
+</html>
